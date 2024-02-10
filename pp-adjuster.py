@@ -16,6 +16,7 @@
 #
 
 import os
+import time
 import gi.repository
 gi.require_version('Notify', '0.7')
 from gi.repository import Notify
@@ -29,7 +30,12 @@ elif os.popen('powerprofilesctl get').read().strip() == "balanced":
 elif os.popen('powerprofilesctl get').read().strip() == "performance":
     os.system("powerprofilesctl set power-saver")
 
-
 new_profile = os.popen('powerprofilesctl get').read().strip()
 
-Notify.Notification.new("Power profile set to " + new_profile).show()
+time.sleep(.5)
+
+Notify.Notification.new(
+    "Power Mode Changed.",
+    "Power profile set to " + new_profile + ".",
+    "dialog-information" # dialog-warn, dialog-error
+).show()
