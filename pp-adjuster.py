@@ -39,3 +39,5 @@ Notify.Notification.new(
     "Power profile set to " + new_profile + ".",
     "dialog-information" # dialog-warn, dialog-error
 ).show()
+
+Notify.uninit()
