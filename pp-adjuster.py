@@ -32,12 +32,14 @@ elif os.popen('powerprofilesctl get').read().strip() == "performance":
 
 new_profile = os.popen('powerprofilesctl get').read().strip()
 
-time.sleep(.5)
-
-Notify.Notification.new(
+notification = Notify.Notification.new(
     "Power Mode Changed.",
     "Power profile set to " + new_profile + ".",
     "dialog-information" # dialog-warn, dialog-error
-).show()
+)
+
+notification.show()
+time.sleep(5)
+notification.close()
 
 Notify.uninit()
