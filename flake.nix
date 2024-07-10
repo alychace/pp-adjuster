@@ -40,6 +40,7 @@
           description = "Automatically adjust power profile and notify user.";
           license = licenses.gpl3;
           maintainers = with maintainers; [alyraffauf];
+          mainProgram = "pp-adjuster";
         };
       };
     });
