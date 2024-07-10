@@ -16,12 +16,9 @@
 #
 
 import os
-import time
-import gi.repository
-gi.require_version('Notify', '0.7')
-from gi.repository import Notify
 
-Notify.init("Power Profile Adjuster")
+def send_notification(summary, body, icon="dialog-information"):
+    os.system(f'notify-send "{summary}" "{body}" -i {icon}')
 
 if os.popen('powerprofilesctl get').read().strip() == "power-saver":
     os.system("powerprofilesctl set balanced")
@@ -32,14 +29,4 @@ elif os.popen('powerprofilesctl get').read().strip() == "performance":
 
 new_profile = os.popen('powerprofilesctl get').read().strip()
 
-notification = Notify.Notification.new(
-    "Power Mode Changed.",
-    "Power profile set to " + new_profile + ".",
-    "dialog-information" # dialog-warn, dialog-error
-)
-
-notification.show()
-time.sleep(5)
-notification.close()
-
-Notify.uninit()
+send_notification("Power Mode Changed", f"Power profile set to {new_profile}.", "dialog-information")
